@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class App extends React.Component {
   state = {
-    user: null,
+    user: localStorage.getItem("user"),
     search: "",
     username_login: "",
     username_signUp: "",
@@ -82,11 +82,21 @@ class App extends React.Component {
     } else if (!event.target.password_confirmation) {
       this.setState({ user: user });
     }
+    localStorage.setItem("user", user);
     history.push("/home");
   };
 
+  handleLogin = (event, history) => {
+    event.preventDefault();
+  };
+
+  handleSignup = (event, history) => {
+    event.preventDefault();
+  };
+
   logout = () => {
-    this.setState({ user: null });
+    localStorage.clear();
+    window.location.reload();
   };
 
   inputChange = event => {
@@ -101,7 +111,6 @@ class App extends React.Component {
         this.searchSong(query);
       }, 500)
     });
-    //this.searchSong(this.state.search);
   };
 
   inputChangeLoginSignup = event => {
@@ -122,7 +131,6 @@ class App extends React.Component {
     return (
       <Router>
         <>
-          {/* <Navbar {...this.state} logout={this.logout} /> */}
           <Route
             exact
             path="/home"
@@ -141,6 +149,8 @@ class App extends React.Component {
                 songLoaded={this.state.songLoaded}
                 play={this.state.play}
                 handlePlayPause={this.handlePlayPause}
+                redirectToLogin={this.redirectToLogin}
+                logout={this.logout}
               />
             )}
           />
@@ -154,6 +164,8 @@ class App extends React.Component {
                 {...routerProps}
                 {...this.state}
                 login={this.login}
+                handleLogin={this.handleLogin}
+                handleSignup={this.handleSignup}
               />
             )}
           />

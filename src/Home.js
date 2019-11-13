@@ -24,6 +24,10 @@ export default class Home extends React.Component {
     this.props.handlePlayPause();
   };
 
+  logout = () => {
+    this.props.logout(this.props.history);
+  };
+
   componentDidMount() {
     if (this.props.user) {
       this.player = new this.YTPlayer("#player");
@@ -55,13 +59,16 @@ export default class Home extends React.Component {
         <button type="submit"></button>
         <div id="player"></div>
         {this.props.songLoaded ? (
-          <div>
+          <div className="controls">
             <button onClick={this.props.handleNextSong} className="next">
-              Next Song
+              <i className="fa fa-step-forward"></i>
             </button>
             <button onClick={this.handlePlayPause}>
-              {" "}
-              {this.props.play ? "PAUSE" : "PLAY"}
+              {this.props.play ? (
+                <i className="fa fa-pause"></i>
+              ) : (
+                <i className="fa fa-play"></i>
+              )}
             </button>
           </div>
         ) : null}
@@ -70,9 +77,13 @@ export default class Home extends React.Component {
           handleSongRequest={this.props.handleSongRequest}
           searchResults={this.props.searchResults}
         />
+        <button className="logoutButton" onClick={this.logout}>
+          Logout
+        </button>
       </div>
     ) : (
-      <h1 className="login-warning"> You have to be logged in to see that!</h1>
+      <div>{this.props.history.push("/")}</div>
+      //   <h1 className="login-warning"> You have to be logged in to see that!</h1>
     );
   }
 }

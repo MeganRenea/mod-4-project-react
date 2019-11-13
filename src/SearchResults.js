@@ -7,7 +7,7 @@ export default class SearchResults extends React.Component {
     }
     return this.props.searchResults.map(song => {
       return (
-        <>
+        <div>
           <li
             onClick={() =>
               this.props.handleSongRequest(song.name, song.artist, song.uri)
@@ -16,7 +16,7 @@ export default class SearchResults extends React.Component {
             {song.name} - {song.artist}
           </li>
           <br></br>
-        </>
+        </div>
       );
     });
   };

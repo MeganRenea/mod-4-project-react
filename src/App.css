@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 ul {
   list-style-type: none;
@@ -61,9 +61,14 @@ button {
   background: transparent;
   border: none;
   color: white;
+  outline: none;
 }
 
-.App-logo {
+button:hover {
+  color: rgb(9, 236, 244);
+}
+
+/* .App-logo {
   height: 40vmin;
 }
 
@@ -80,20 +85,39 @@ button {
 
 .App-link {
   color: #09d3ac;
-}
+} */
 
 .search {
   margin: 0 auto;
 }
 
-.searchResults {
-  margin: 0 auto;
+.logoutButton {
+  position: fixed;
+  left: 95%;
+  top: 95%;
 }
 
-.navbar {
+.logoutButton:hover {
+  color: red;
+}
+
+.controls {
+  margin: 0 auto;
+  position: fixed;
+  left: 0.5%;
+}
+
+.searchResults {
+  display: flex;
+  margin: 0 auto;
+  overflow-y: scroll;
+  flex-direction: column;
+}
+
+/* .navbar {
   position: fixed;
   left: 50%;
-}
+} */
 
 .login-warning {
   position: fixed;

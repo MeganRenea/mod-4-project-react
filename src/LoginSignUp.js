@@ -4,16 +4,15 @@ export default class LoginSignUp extends React.Component {
   render() {
     return (
       <>
+        <div>
+          {localStorage.getItem("user")
+            ? this.props.history.push("/home")
+            : null}
+        </div>
         <form
           className="login"
           onChange={this.props.inputChange}
-          onSubmit={event =>
-            this.props.login(
-              event,
-              this.props.username_login,
-              this.props.history
-            )
-          }
+          onSubmit={event => this.props.handleLogin(event, this.props.history)}
         >
           <h1>Login</h1>
           <input
