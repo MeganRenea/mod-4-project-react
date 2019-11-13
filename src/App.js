@@ -86,12 +86,50 @@ class App extends React.Component {
   //   history.push("/home");
   // };
 
-  handleLogin = (event, history) => {
+  handleLogin = (event) => {
     event.preventDefault();
+    fetch("http://localhost:3000/login",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept":"application/json"
+      },
+      body: JSON.stringify ({
+        username: this.state.username_login,
+        password: this.state.password_login
+      })
+    }).then(resp=> resp.json()).then(json => {
+      if (json.error){
+        console.log(json.error)
+      } else{
+        localStorage.setItem("user", json.username)
+        this.setState({user: localStorage.getItem("user")})
+      }
+    })
+    
   };
 
-  handleSignup = (event, history) => {
+  handleSignup = (event) => {
     event.preventDefault();
+    fetch("http://localhost:3000/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        username: this.state.username_signUp,
+        password: this.state.password_signUp
+      })
+    }).then(resp=> resp.json()).then(json => {
+      if (json.error){
+        console.log(json.error)
+      } else{
+        localStorage.setItem("user", json.username)
+        this.setState({user: localStorage.getItem("user")})
+      }
+    })
+
   };
 
   logout = () => {

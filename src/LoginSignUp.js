@@ -34,12 +34,7 @@ export default class LoginSignUp extends React.Component {
         <form
           className="signup"
           onChange={this.props.inputChange}
-          onSubmit={event =>
-            this.props.login(
-              event,
-              this.props.username_signUp,
-              this.props.history
-            )
+          onSubmit={event => this.props.handleSignup(event)
           }
         >
           <h1>Sign Up </h1>
