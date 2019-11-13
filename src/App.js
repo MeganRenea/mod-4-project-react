@@ -100,7 +100,7 @@ class App extends React.Component {
       })
     }).then(resp=> resp.json()).then(json => {
       if (json.error){
-        console.log(json.error)
+        alert(json.error)
       } else{
         localStorage.setItem("user", json.username)
         this.setState({user: localStorage.getItem("user")})
@@ -111,6 +111,7 @@ class App extends React.Component {
 
   handleSignup = (event) => {
     event.preventDefault();
+    if (this.state.password_signUp === this.state.password_confirmation){
     fetch("http://localhost:3000/create", {
       method: "POST",
       headers: {
@@ -123,13 +124,15 @@ class App extends React.Component {
       })
     }).then(resp=> resp.json()).then(json => {
       if (json.error){
-        console.log(json.error)
+        alert(json.error)
       } else{
         localStorage.setItem("user", json.username)
         this.setState({user: localStorage.getItem("user")})
       }
     })
-
+  } else (
+    alert("Passwords must match.")
+  )
   };
 
   logout = () => {
