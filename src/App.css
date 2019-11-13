@@ -1,8 +1,74 @@
-.App {
+/* .App {
   text-align: center;
+} */
+
+ul {
+  list-style-type: none;
+  display: inline-block;
+  position: fixed;
+  left: 42%;
 }
 
-.App-logo {
+li:hover {
+  color: rgb(9, 236, 244);
+  cursor: pointer;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+.login {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  background-color: black;
+}
+
+.signup {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  background-color: black;
+}
+
+input {
+  background: transparent;
+  border: none;
+  color: white;
+}
+
+input[name="search"] {
+  height: 200px;
+  width: 100%;
+  font-size: 100px;
+  display: inline-block;
+  text-align: left;
+  border: none;
+  outline: none;
+  overflow: scroll;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+button {
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+}
+
+button:hover {
+  color: rgb(9, 236, 244);
+}
+
+/* .App-logo {
   height: 40vmin;
 }
 
@@ -19,14 +85,50 @@
 
 .App-link {
   color: #09d3ac;
-}
+} */
 
 .search {
+  margin: 0 auto;
+}
+
+.logoutButton {
   position: fixed;
-  top: 20%;
-  left: 50%
+  left: 95%;
+  top: 95%;
+}
+
+.logoutButton:hover {
+  color: red;
+}
+
+.controls {
+  margin: 0 auto;
+  position: fixed;
+  left: 0.5%;
+}
+
+.searchResults {
+  display: flex;
+  margin: 0 auto;
+  overflow-y: scroll;
+  flex-direction: column;
+}
+
+/* .navbar {
+  position: fixed;
+  left: 50%;
+} */
+
+.login-warning {
+  position: fixed;
+  top: 45%;
+  left: 35%;
+}
+
+.next:hover {
+  cursor: pointer;
 }
 
 #player {
-  display:none
+  display: none;
 }
