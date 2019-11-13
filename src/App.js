@@ -70,21 +70,21 @@ class App extends React.Component {
     }
   };
 
-  login = (event, user, history) => {
-    event.preventDefault();
-    if (
-      event.target.password_confirmation &&
-      event.target.password_confirmation.value ===
-        event.target.password_signUp.value &&
-      event.target.password_signUp.value !== ""
-    ) {
-      this.setState({ user: user });
-    } else if (!event.target.password_confirmation) {
-      this.setState({ user: user });
-    }
-    localStorage.setItem("user", user);
-    history.push("/home");
-  };
+  // login = (event, user, history) => {
+  //   event.preventDefault();
+  //   if (
+  //     event.target.password_confirmation &&
+  //     event.target.password_confirmation.value ===
+  //       event.target.password_signUp.value &&
+  //     event.target.password_signUp.value !== ""
+  //   ) {
+  //     this.setState({ user: user });
+  //   } else if (!event.target.password_confirmation) {
+  //     this.setState({ user: user });
+  //   }
+  //   localStorage.setItem("user", user);
+  //   history.push("/home");
+  // };
 
   handleLogin = (event, history) => {
     event.preventDefault();
