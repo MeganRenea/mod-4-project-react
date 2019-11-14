@@ -1,5 +1,6 @@
 import React from "react";
 import SearchResults from "./SearchResults";
+import Lyrics from "./Lyrics.js";
 
 export default class Home extends React.Component {
   player;
@@ -60,7 +61,7 @@ export default class Home extends React.Component {
         <div id="player"></div>
         {this.props.songLoaded ? (
           <div className="controls">
-            <button onClick={this.props.handleNextSong} className="next">
+            <button onClick={this.props.handleNextSong}>
               <i className="fa fa-step-forward"></i>
             </button>
             <button onClick={this.handlePlayPause}>
@@ -77,6 +78,7 @@ export default class Home extends React.Component {
           handleSongRequest={this.props.handleSongRequest}
           searchResults={this.props.searchResults}
         />
+        <Lyrics lyrics={this.props.lyrics} />
         <button className="logoutButton" onClick={this.logout}>
           Logout
         </button>

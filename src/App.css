@@ -22,14 +22,14 @@ body {
 .login {
   position: fixed;
   top: 20%;
-  left: 50%;
+  left: 47.5%;
   background-color: black;
 }
 
 .signup {
   position: fixed;
   top: 40%;
-  left: 50%;
+  left: 47.5%;
   background-color: black;
 }
 
@@ -112,6 +112,7 @@ button:hover {
   margin: 0 auto;
   overflow-y: scroll;
   flex-direction: column;
+  left: 10%;
 }
 
 /* .navbar {
@@ -119,14 +120,26 @@ button:hover {
   left: 50%;
 } */
 
+button:hover {
+  cursor: pointer;
+}
+
 .login-warning {
   position: fixed;
   top: 45%;
   left: 35%;
 }
 
-.next:hover {
-  cursor: pointer;
+.lyrics {
+  position: fixed;
+  left: 70%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  overflow: scroll;
+  height: 600px;
+  width: 400px;
+  overflow: auto;
 }
 
 #player {

@@ -20,7 +20,26 @@ class App extends React.Component {
     typing: false,
     typingTimeout: 0,
     songLoaded: false,
-    play: false
+    play: false,
+    lyrics: []
+  };
+
+  getLyrics = (name, artist) => {
+    fetch(
+      `http://localhost:3000/geniusrequest?q=${this.normalizeString(
+        name
+      )} ${this.normalizeString(artist)}`
+    )
+      .then(resp => resp.json())
+      .then(json => {
+        this.setState({
+          lyrics: json
+        });
+      });
+  };
+
+  normalizeString = str => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   };
 
   searchSong = query => {
@@ -34,7 +53,9 @@ class App extends React.Component {
 
   handleSongRequest = (name, artist, uri) => {
     fetch(
-      `http://localhost:3000/handlesongrequest?q=${name} ${artist}&uri=${uri}`
+      `http://localhost:3000/handlesongrequest?q=${this.normalizeString(
+        name
+      )} ${this.normalizeString(artist)}&uri=${uri}`
     )
       .then(resp => resp.json())
       .then(json =>
@@ -47,6 +68,7 @@ class App extends React.Component {
           search: `${name} - ${artist}`
         })
       );
+    this.getLyrics(name, artist);
   };
 
   handleNextSong = () => {
@@ -67,6 +89,7 @@ class App extends React.Component {
             play: true
           });
         });
+      this.getLyrics(nextSong.name, nextSong.artist);
     }
   };
 
@@ -86,53 +109,54 @@ class App extends React.Component {
   //   history.push("/home");
   // };
 
-  handleLogin = (event) => {
+  handleLogin = event => {
     event.preventDefault();
-    fetch("http://localhost:3000/login",{
+    fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Accept":"application/json"
+        Accept: "application/json"
       },
-      body: JSON.stringify ({
+      body: JSON.stringify({
         username: this.state.username_login,
         password: this.state.password_login
       })
-    }).then(resp=> resp.json()).then(json => {
-      if (json.error){
-        alert(json.error)
-      } else{
-        localStorage.setItem("user", json.username)
-        this.setState({user: localStorage.getItem("user")})
-      }
     })
-    
+      .then(resp => resp.json())
+      .then(json => {
+        if (json.error) {
+          alert(json.error);
+        } else {
+          localStorage.setItem("user", json.username);
+          this.setState({ user: localStorage.getItem("user") });
+        }
+      });
   };
 
-  handleSignup = (event) => {
+  handleSignup = event => {
     event.preventDefault();
-    if (this.state.password_signUp === this.state.password_confirmation){
-    fetch("http://localhost:3000/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        username: this.state.username_signUp,
-        password: this.state.password_signUp
+    if (this.state.password_signUp === this.state.password_confirmation) {
+      fetch("http://localhost:3000/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          username: this.state.username_signUp,
+          password: this.state.password_signUp
+        })
       })
-    }).then(resp=> resp.json()).then(json => {
-      if (json.error){
-        alert(json.error)
-      } else{
-        localStorage.setItem("user", json.username)
-        this.setState({user: localStorage.getItem("user")})
-      }
-    })
-  } else (
-    alert("Passwords must match.")
-  )
+        .then(resp => resp.json())
+        .then(json => {
+          if (json.error) {
+            alert(json.error);
+          } else {
+            localStorage.setItem("user", json.username);
+            this.setState({ user: localStorage.getItem("user") });
+          }
+        });
+    } else alert("Passwords must match.");
   };
 
   logout = () => {
@@ -192,6 +216,7 @@ class App extends React.Component {
                 handlePlayPause={this.handlePlayPause}
                 redirectToLogin={this.redirectToLogin}
                 logout={this.logout}
+                lyrics={this.state.lyrics}
               />
             )}
           />
