@@ -5,6 +5,8 @@ import About from "./About";
 import LoginSignUp from "./LoginSignUp";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+const HEROKU_URL = "https://obscure-retreat-80319.herokuapp.com/";
+
 class App extends React.Component {
   state = {
     user: localStorage.getItem("user"),
@@ -26,7 +28,7 @@ class App extends React.Component {
 
   getLyrics = (name, artist) => {
     fetch(
-      `http://localhost:3000/geniusrequest?q=${this.normalizeString(
+      `https://obscure-retreat-80319.herokuapp.com/geniusrequest?q=${this.normalizeString(
         name
       )} ${this.normalizeString(artist)}`
     )
@@ -46,14 +48,16 @@ class App extends React.Component {
     if (query === "") {
       return false;
     }
-    fetch(`http://localhost:3000/spotifysearch?q=${query}`)
+    fetch(
+      `https://obscure-retreat-80319.herokuapp.com/spotifysearch?q=${query}`
+    )
       .then(resp => resp.json())
       .then(json => this.setState({ searchResults: json }));
   };
 
   handleSongRequest = (name, artist, uri) => {
     fetch(
-      `http://localhost:3000/handlesongrequest?q=${this.normalizeString(
+      `https://obscure-retreat-80319.herokuapp.com/handlesongrequest?q=${this.normalizeString(
         name
       )} ${this.normalizeString(artist)}&uri=${uri}`
     )
@@ -78,7 +82,7 @@ class App extends React.Component {
       this.handleSongRequest(nextSong.name, nextSong.artist, nextSong.uri);
     } else {
       fetch(
-        `http://localhost:3000/youtubesearch?q=${nextSong.name} ${nextSong.artist}`
+        `https://obscure-retreat-80319.herokuapp.com/youtubesearch?q=${nextSong.name} ${nextSong.artist}`
       )
         .then(response => response.json())
         .then(json => {
@@ -111,7 +115,7 @@ class App extends React.Component {
 
   handleLogin = event => {
     event.preventDefault();
-    fetch("http://localhost:3000/login", {
+    fetch("https://obscure-retreat-80319.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -136,7 +140,7 @@ class App extends React.Component {
   handleSignup = event => {
     event.preventDefault();
     if (this.state.password_signUp === this.state.password_confirmation) {
-      fetch("http://localhost:3000/create", {
+      fetch("https://obscure-retreat-80319.herokuapp.com/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

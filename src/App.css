@@ -131,14 +131,15 @@ button:hover {
 }
 
 .lyrics {
-  position: fixed;
-  left: 70%;
+  position: relative;
+  left: 30%;
+  top: 0;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   overflow: scroll;
-  height: 600px;
-  width: 400px;
+  height: 500px;
+  width: 500px;
   overflow: auto;
 }
 
